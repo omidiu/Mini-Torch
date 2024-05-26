@@ -23,3 +23,16 @@ class Tensor:
         out._backward = backward
 
         return out
+
+    def __mul__(self, other):
+        other = other if isinstance(other, Tensor) else Tensor(other)
+
+        out = Tensor(self.value * other.value, children=(self, other), operator='*')
+
+        def backward():
+            self.grad += other.value * out.grad
+            other.grad += self.value * out.grad
+        
+        out._backward = backward
+
+        return out

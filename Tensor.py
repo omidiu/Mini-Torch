@@ -36,3 +36,16 @@ class Tensor:
         out._backward = backward
 
         return out
+
+    def __pow__(self, other):
+        other = other if isinstance(other, Tensor) else Tensor(other)
+
+        out = Tensor(self.value ** other.value, children=(self, other), operator='**')
+
+        def backward():
+            self.grad += (other.value * (self.value ** (other.value - 1))) * out.grad
+            other.grad += (self.value ** other.value) * np.log(self.value) * out.grad
+
+        out._backward = backward
+
+        return out

@@ -51,23 +51,19 @@ class Tensor:
         return out
 
     def backward(self):
-        # initialize topological sort order list
         topo_order = []
         visited = set()
         
-        # topological sort
         def topological_sort(tensor):
             if tensor not in visited:
                 visited.add(tensor)
                 for child in tensor.children:
                     topological_sort(child)
                 topo_order.append(tensor)
-            #print(topo_order)
         topological_sort(self)
 
-        # initialize gradient of final node
+        # initialize gradient of current node
         self.grad = 1.0
-
-        # execute the _backward method in reverse topological order
+        
         for tensor in reversed(topo_order):
             tensor._backward()

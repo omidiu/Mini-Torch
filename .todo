@@ -1,0 +1,1 @@
+model = MLP(3, 1, 2) doesn't work

@@ -1,1 +1,2 @@
-from .mlp import *
+from .modules import *
+# from .functional import * as F

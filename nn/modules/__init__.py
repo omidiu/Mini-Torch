@@ -1,3 +1,3 @@
 from .module import Module
-from .linear import Layer
+from .linear import Linear
 

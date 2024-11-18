@@ -3,7 +3,7 @@ from tensor import Tensor
 import numpy as np
 import nn.functional as F
 
-class Layer(Module):
+class Linear(Module):
     def __init__(self, in_features, out_features, bias=True):
         super().__init__()
         self.in_features = in_features

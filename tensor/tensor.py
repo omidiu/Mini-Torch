@@ -1,5 +1,5 @@
 import numpy as np
-from numpy import dtype
+
 from utils.broadcasting import align_grad_shape
 
 
@@ -14,14 +14,12 @@ class Tensor:
         self._backward = lambda: None
         self.label = label
 
-
     def __repr__(self) -> str:
         return f"Tensor(value={self.data})"
 
-    def __pow__(self, other): # TODO: CHECK THIS
-        other = other if isinstance(other, Tensor) else Tensor(other) # grad to false
-        out = Tensor(self.data ** other.data, children=(self, ), operator='**')
-
+    def __pow__(self, other):  # TODO: CHECK THIS
+        other = other if isinstance(other, Tensor) else Tensor(other)  # grad to false
+        out = Tensor(self.data ** other.data, children=(self,), operator='**')
 
         def _backward():
             self.grad += (other.data * self.data ** (other.data - 1)) * out.grad
@@ -29,8 +27,6 @@ class Tensor:
         out._backward = _backward
 
         return out
-
-
 
     def __add__(self, other):
         other = other if isinstance(other, Tensor) else Tensor(other)
@@ -45,10 +41,10 @@ class Tensor:
         return out
 
     def sum(self):
-        out = Tensor(self.data.sum(), children=(self, ), operator='sum')
+        out = Tensor(self.data.sum(), children=(self,), operator='sum')
 
         def backward():
-            self.grad =  out.grad * np.ones_like(self.data)
+            self.grad = out.grad * np.ones_like(self.data)
 
         out._backward = backward
 
@@ -84,12 +80,12 @@ class Tensor:
         topological_sort(self)
         self.grad = np.ones_like(self.data, dtype=self.data.dtype)
 
-
         for tensor in reversed(topo_order):
             tensor._backward()
 
-    def __neg__(self): # -self
-        out = Tensor(-self.data, children=(self, ), operator='neg')
+    def __neg__(self):  # -self
+        out = Tensor(-self.data, children=(self,), operator='neg')
+
         def backward():
             self.grad += -1 * out.grad
 
@@ -106,11 +102,11 @@ class Tensor:
     def __rsub__(self, other):
         return other + (-self)
 
-    def __rmul__(self, other): #
+    def __rmul__(self, other):  #
         return self * other
 
     def __truediv__(self, other):
-        return self * other**-1
+        return self * other ** -1
 
     def __rtruediv__(self, other):
-        return other * self**-1
+        return other * self ** -1

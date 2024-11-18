@@ -1,5 +1,7 @@
 import numpy as np
+
 from tensor import Tensor
+
 
 def linear(input, weight, bias=None):
     # Ensure input and weight are Tensors
@@ -32,10 +34,12 @@ def linear(input, weight, bias=None):
 
     return out
 
+
 def tanh(input):
     out = Tensor(np.tanh(input.data), children=(input,), operator='tanh')
 
     def _backward():
         input.grad += (1. - out.data ** 2) * out.grad
+
     out._backward = _backward
     return out

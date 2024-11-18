@@ -1,5 +1,7 @@
-from .optimizer import Optimizer
 import numpy as np
+
+from .optimizer import Optimizer
+
 
 class Adam(Optimizer):
 

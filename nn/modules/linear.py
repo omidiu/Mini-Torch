@@ -1,7 +1,9 @@
-from .module import Module
-from tensor import Tensor
 import numpy as np
+
 import nn.functional as F
+from tensor import Tensor
+from .module import Module
+
 
 class Linear(Module):
     def __init__(self, in_features, out_features, bias=True):
@@ -16,5 +18,3 @@ class Linear(Module):
 
     def forward(self, x):
         return F.linear(x, self.weight, self.bias)
-
-

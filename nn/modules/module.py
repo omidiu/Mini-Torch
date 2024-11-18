@@ -1,7 +1,8 @@
-from tensor import Tensor
 from collections import OrderedDict
 from collections.abc import Iterator
 from typing import Tuple
+
+from tensor import Tensor
 
 
 class Module:
@@ -53,4 +54,3 @@ class Module:
             main_str += '\n  ' + '\n  '.join(lines) + '\n'
         main_str += ')'
         return main_str
-

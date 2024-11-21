@@ -55,7 +55,7 @@ Install the only required dependency:
 pip install numpy
 ```
 
-### 1. Build a Simple MLP (TODO: CHANGE IT, add loss function)
+### 1. Build a Simple MLP
 
 ```python
 from nn import Linear, Module, MSELoss

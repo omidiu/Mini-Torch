@@ -269,3 +269,17 @@ intentionally omitted as they are out of the scope of this project.
 Hooks, Sparse Layers, Shuffle Layers, DataParallel Layers, Utilities
 
 
+## ⭐ From micrograd to MiniTorch
+We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd) and extended it to support high-dimensional tensor operations, aligning more closely with PyTorch.
+
+The key difference is that we extended derivatives to work with high-dimensional tensors using matrix calculus. In this view, derivatives are linear transformations, like Jacobians, mapping changes in inputs to outputs. This supports operations like matrix multiplication, broadcasting, and reductions while maintaining efficient backpropagation.  For more information, we highly recommend the MIT course *"[Matrix Calculus for Machine Learning and Beyond](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/video_galleries/lecture-videos/)*". It covers most of the mathematical prerequisites. You can watch it or wait for our videos on the topic. 🎥
+
+Also our library is more modular and object-oriented also it is more similar to pytorch api, for instance each by inhereting Module class each class can play as a neural network and receives all of its parameters without manually write "parameters()" for each module which is the case in micrograd.
+
+
+**Note**: If we develop this library further, we aim to refactor the _backward method to make it a property of each tensor (like grad_fn) rather than relying on its parents. This change will simplify the implementation of requires_grad and enhance the library's usability.
+
+ 
+
+
+

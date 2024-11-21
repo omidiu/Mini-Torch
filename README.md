@@ -96,7 +96,7 @@ for epoch in range(epochs):
     print(f"Epoch {epoch}, Loss: {loss.data}")
 ```
 
-### 2. Compare MiniTorch with PyTorch
+### 2. MiniTorch vs. PyTorch: Validation
 ```python
 import numpy as np
 

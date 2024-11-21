@@ -12,6 +12,23 @@ Currently, MiniTorch supports building simple Multi-Layer Perceptrons (MLPs), wi
 
 --------------------------------------------------------------------------------
 
+## ✨ micrograd VS MiniTorch
+<div style="text-align: center;">
+    <img src="./statics/micrograd_minitorch.png" alt="YouTube Logo" width="100%" />
+</div>
+
+We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd) and extended it to support high-dimensional tensor operations, aligning more closely with PyTorch.
+
+- The key difference is that we extended derivatives to work with high-dimensional tensors using matrix calculus. In this view, derivatives are linear transformations, like Jacobians, mapping changes in inputs to outputs. This supports operations like matrix multiplication, broadcasting, and reductions while maintaining efficient backpropagation.  For more information, we highly recommend the MIT course *"[Matrix Calculus for Machine Learning and Beyond](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/video_galleries/lecture-videos/)*". It covers most of the mathematical prerequisites. You can watch it or wait for our videos on the topic. 🎥
+
+
+- Our library is more modular, object-oriented, and closely aligned with the PyTorch API. For example, by inheriting the `Module` class, any custom class can function as a neural network and automatically retrieve all its parameters. This eliminates the need to manually define a `parameters()` method for each module, as is required in micrograd.
+
+
+**Note**: If we develop this library further, we aim to refactor the `_backward` method to make it a property of each tensor (like `grad_fn`) rather than relying on its parents. This change will simplify the implementation of `requires_grad`.
+
+--------------------------------------------------------------------------------
+
 ## ⭐️ Join Us on Our Journey!
 
 If MiniTorch receives **1k GitHub stars ⭐️**, we will:
@@ -21,12 +38,6 @@ If MiniTorch receives **1k GitHub stars ⭐️**, we will:
 2. **Create a YouTube playlist <img src="./statics/Youtube_logo.png" alt="YouTube Logo" width="25" />**: This series will explore concepts ranging from mathematical prerequisites to advanced
    computer science algorithms, enhanced by sophisticated animations created
    using [Manim](https://github.com/ManimCommunity/manim).
-   
-<div style="text-align: center;">
-    <img src="./statics/Manim_logo.png" alt="YouTube Logo" width="200" />
-</div>
-
-
 
 Your support will validate the value of this project and help us provide free, high-quality educational resources for
 the AI community.
@@ -140,24 +151,6 @@ print(arrays_are_close(b_torch.grad.detach().numpy(), b_mini.grad))
 ```
 
 --------------------------------------------------------------------------------
-
-## ✨ micrograd VS MiniTorch
-<div style="text-align: center;">
-    <img src="./statics/micrograd_minitorch.png" alt="YouTube Logo" width="100%" />
-</div>
-
-We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd) and extended it to support high-dimensional tensor operations, aligning more closely with PyTorch.
-
-- The key difference is that we extended derivatives to work with high-dimensional tensors using matrix calculus. In this view, derivatives are linear transformations, like Jacobians, mapping changes in inputs to outputs. This supports operations like matrix multiplication, broadcasting, and reductions while maintaining efficient backpropagation.  For more information, we highly recommend the MIT course *"[Matrix Calculus for Machine Learning and Beyond](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/video_galleries/lecture-videos/)*". It covers most of the mathematical prerequisites. You can watch it or wait for our videos on the topic. 🎥
-
-
-- Our library is more modular, object-oriented, and closely aligned with the PyTorch API. For example, by inheriting the `Module` class, any custom class can function as a neural network and automatically retrieve all its parameters. This eliminates the need to manually define a `parameters()` method for each module, as is required in micrograd.
-
-
-**Note**: If we develop this library further, we aim to refactor the `_backward` method to make it a property of each tensor (like `grad_fn`) rather than relying on its parents. This change will simplify the implementation of `requires_grad`.
-
---------------------------------------------------------------------------------
- 
 
 
 ## 📈 Future Plans

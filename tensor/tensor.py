@@ -50,6 +50,17 @@ class Tensor:
 
         return out
 
+    def mean(self):
+        out = Tensor(self.data.mean(), children=(self,), operator='mean')
+
+        def _backward():
+            scale = 1.0 / np.prod(self.shape)
+            self.grad += scale * out.grad * np.ones_like(self.data)
+
+        out._backward = _backward
+
+        return out
+
     def __mul__(self, other):
         other = other if isinstance(other, Tensor) else Tensor(other)
         out = Tensor(self.data * other.data, children=(self, other), operator='*')

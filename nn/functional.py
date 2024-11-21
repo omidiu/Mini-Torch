@@ -43,3 +43,16 @@ def tanh(input):
 
     out._backward = _backward
     return out
+
+
+def mse_loss(input, target, reduction):
+    # TODO: Check Broadcasting
+    squared_error = (input - target) ** 2
+    if reduction == "mean":
+        return squared_error.mean()  # Mean reduction
+    elif reduction == "sum":
+        return squared_error.sum()  # Sum reduction
+    else:
+        return squared_error
+
+

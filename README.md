@@ -271,6 +271,10 @@ Hooks, Sparse Layers, Shuffle Layers, DataParallel Layers, Utilities
 
 
 ## ✨ micrograd VS MiniTorch
+<div style="text-align: center;">
+    <img src="./statics/micrograd_minitorch.png" alt="YouTube Logo" width="100%" />
+</div>
+
 We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd) and extended it to support high-dimensional tensor operations, aligning more closely with PyTorch.
 
 - The key difference is that we extended derivatives to work with high-dimensional tensors using matrix calculus. In this view, derivatives are linear transformations, like Jacobians, mapping changes in inputs to outputs. This supports operations like matrix multiplication, broadcasting, and reductions while maintaining efficient backpropagation.  For more information, we highly recommend the MIT course *"[Matrix Calculus for Machine Learning and Beyond](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/video_galleries/lecture-videos/)*". It covers most of the mathematical prerequisites. You can watch it or wait for our videos on the topic. 🎥

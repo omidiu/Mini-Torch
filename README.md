@@ -150,7 +150,7 @@ We will implement these modules:
 - Modules with a ✅ are already implemented (though they are currently minimal).
 - Modules with a `*` are prioritized for implementation in the next updates.
 
-The above list comes from PyTorch's [original documentation](https://pytorch.org/docs/main/nn.html). Some modules are
+The below list comes from PyTorch's [original documentation](https://pytorch.org/docs/main/nn.html). Some modules are
 intentionally omitted as they are out of the scope of this project.
 
 ### General

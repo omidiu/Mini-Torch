@@ -1,7 +1,7 @@
 ## 🔥 MiniTorch 🔥
 
 <div style="text-align: center;">
-    <img src="./statics/pytorch_Minitorch.png" alt="Pytorch vs minitorch" width="100%" />
+    <img src="./statics/pytorch_minitorch.png" alt="Pytorch vs minitorch" width="100%" />
 </div>
 
 **MiniTorch** is a minimalist educational library built to uncover the mechanics behind PyTorch, using only Python and

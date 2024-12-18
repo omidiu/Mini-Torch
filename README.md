@@ -1,7 +1,7 @@
 ## 🔥 MiniTorch 🔥
 
 <div style="text-align: center;">
-    <img src="./statics/pytorch_minitorch_.png" alt="YouTube Logo" width="100%" />
+    <img src="./statics/pytorch_Minitorch.png" alt="Pytorch vs minitorch" width="100%" />
 </div>
 
 **MiniTorch** is a minimalist educational library built to uncover the mechanics behind PyTorch, using only Python and
@@ -14,7 +14,7 @@ Currently, MiniTorch supports building simple Multi-Layer Perceptrons (MLPs), wi
 
 ## ✨ micrograd VS MiniTorch
 <div style="text-align: center;">
-    <img src="./statics/micrograd_minitorch.png" alt="YouTube Logo" width="100%" />
+    <img src="./statics/micrograd_minitorch.png" alt="micrograd vs MiniTorch" width="100%" />
 </div>
 
 We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd) and extended it to support high-dimensional tensor operations, aligning more closely with PyTorch.
@@ -25,7 +25,7 @@ We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/microgra
 - Our library is more modular, object-oriented, and closely aligned with the PyTorch API. For example, by inheriting the `Module` class, any custom class can function as a neural network and automatically retrieve all its parameters. This eliminates the need to manually define a `parameters()` method for each module, as is required in micrograd.
 
 
-**Note**: If we develop this library further, we aim to refactor the `_backward` method to make it a property of each tensor (like `grad_fn`) rather than relying on its parents. This change will simplify the implementation of `requires_grad`.
+**Note**: If we develop this library further, we aim to refactor the `_backward` method. This change will simplify the implementation of `requires_grad`.
 
 --------------------------------------------------------------------------------
 
@@ -35,9 +35,16 @@ If MiniTorch receives **1k GitHub stars ⭐️**, we will:
 
 1. **Expand the library by adding new features**: We'll implement new `nn.Modules` and extend its functionality. Please
    read the "Future Plans" section in this file for more information about the planned modules.
-2. **Create a YouTube playlist <img src="./statics/Youtube_logo.png" alt="YouTube Logo" width="25" />**: This series will explore concepts ranging from mathematical prerequisites to advanced
-   computer science algorithms, enhanced by sophisticated animations created
-   using [Manim](https://github.com/ManimCommunity/manim).
+2. **Create a YouTube playlist <img src="./statics/Youtube_logo.png" alt="YouTube Logo" width="25" />**: We will create a YouTube playlist that teaches you all the knowledge necessary to build this library. It will cover concepts such as:  
+- The required mathematics, for example, the concept of a derivative based on a matrix  
+- Advanced operations with multi-dimensional tensors  
+- Object-oriented concepts, and how PyTorch automatically identifies all the weights in your network  
+... and more.
+
+We plan to explain every single line of code written in this repository, enabling you to implement it yourself with sufficient time and patience, and gain a deeper understanding of libraries like PyTorch. Furthermore, if this library continues to develop, we will also teach all the newly added parts. For example, we will learn how the process behind the `TransformerEncoderLayer` works. (*This playlist will be presented in English or Persian.*)
+
+
+
 
 Your support will validate the value of this project and help us provide free, high-quality educational resources for
 the AI community.
@@ -45,27 +52,36 @@ the AI community.
 --------------------------------------------------------------------------------
 
 ## 🚀 Quickstart
-
-### ⚙️ Installation
-
-
-First, clone the repository:
+1- clone the repository:
 
 ```bash
-git clone https://github.com/omidiu/minitorch.git
+git clone https://github.com/omidiu/Mini-Torch.git
 ```
 
-Navigate to the project directory:
+2- Navigate to the project directory:
 
 ```bash
 cd minitorch
 ```
 
-Install the only required dependency:
+3- Create a virtual environment:
 
+```bash
+# For Linux/macOS:
+python3 -m venv venv
+source venv/bin/activate
+
+# For Windows:
+python -m venv venv
+venv\Scripts\activate
+```
+
+4- Install the required dependency:
 ```bash
 pip install numpy
 ```
+
+5- Open and run the experiments.ipynb file.
 
 ### 1. Build a Simple MLP
 
@@ -74,28 +90,31 @@ from nn import Linear, Module, MSELoss
 from optim import Adam
 from tensor import Tensor
 import nn.functional as F
+from nn import Linear as MiniLinear, Module as MiniModule, MSELoss as MiniMSELoss
+from optim import Adam as MiniAdam
+from tensor import Tensor as MiniTensor
+import nn.functional as MiniF
 
-
-class MLP(Module):
+class MLP(MiniModule):
     def __init__(self):
         super().__init__()
-        self.linear_1 = Linear(3, 3)
-        self.linear_2 = Linear(3, 6)
-        self.linear_3 = Linear(6, 1)
+        self.linear_1 = MiniLinear(3, 3)
+        self.linear_2 = MiniLinear(3, 6)
+        self.linear_3 = MiniLinear(6, 1)
 
     def forward(self, x):
-        x = F.tanh(self.linear_1(x))
-        x = F.tanh(self.linear_2(x))
-        x = F.tanh(self.linear_3(x))
+        x = MiniF.tanh(self.linear_1(x))
+        x = MiniF.tanh(self.linear_2(x))
+        x = MiniF.tanh(self.linear_3(x))
         return x
-
+    
 model = MLP()
-optim = Adam(model.parameters())
-criterion = MSELoss()
+optim = MiniAdam(model.parameters())
+criterion = MiniMSELoss()
 
 
-X = Tensor([[2.0, 3.0, -1.0], [3.0, -1.0, 0.5], [0.5, 1.0, 1.0], [1.0, 1.0, -1.0]])
-Y = Tensor([[1.0], [-1.0], [-1.0], [1.0]])
+X = MiniTensor([[2.0, 3.0, -1.0], [3.0, -1.0, 0.5], [0.5, 1.0, 1.0], [1.0, 1.0, -1.0]])
+Y = MiniTensor([[1.0], [-1.0], [-1.0], [1.0]])
 
 epochs = 100
 
@@ -106,48 +125,64 @@ for epoch in range(epochs):
     loss.backward()
     optim.step()
     print(f"Epoch {epoch}, Loss: {loss.data}")
+    
+print('\nModel architecture: \n',model)
+print('\n state dict:\n' ,model.state_dict())
 ```
 
-### 2. MiniTorch vs. PyTorch: Validation
+### 2. MiniTorch vs. PyTorch: High Dimensional Tensors
 ```python
 import numpy as np
-
+# torch imports
 import torch
-import torch.nn as nn_torch
-import torch.nn.functional as F_torch
+import torch.nn.functional as TorchF
+from torch import Tensor as TorchTensor
 
-from tensor import Tensor
-import nn as nn_mini
-import nn.functional as F_mini
+# mini_torch imports
+from tensor import Tensor as MiniTensor
+import nn.functional as MiniF
 
+def gradients_are_equal(torch_tensor: TorchTensor, mini_tensor: MiniTensor):
+    print(np.all(torch_tensor.grad.detach().numpy()==mini_tensor.grad))
 
-def arrays_are_close(arr_1, arr_2):
-    return np.allclose(arr_1, arr_2, atol=1e-9)
+val_a = [
+    [
+        [
+            [1, 2, 3, 4]
+        ]
+    ],
+    [
+        [
+            [1, 9, -1, 4]
+        ]
+    ],
+    [
+        [
+            [1, 2, 3, -1]
+        ]
+    ]
+]
 
+val_b = [
+    [1,   9,   3,   4],
+    [0,   1,  -1, -11],
+    [1,  21,  11,  -1]
+]
 
-mse_loss_torch = nn_torch.MSELoss(reduction='sum')
-mse_loss_mini = nn_mini.MSELoss(reduction='sum')
+a_torch = torch.tensor(val_a, requires_grad=True, dtype=torch.float32)
+b_torch = torch.tensor(val_b, requires_grad=True, dtype=torch.float32)
+c_torch = TorchF.linear(a_torch, b_torch)
+d_torch = c_torch.sum(); d_torch.retain_grad()
+d_torch.backward()
 
+a_mini = MiniTensor(val_a)
+b_mini = MiniTensor(val_b)
+c_mini = MiniF.linear(a_mini, b_mini)
+d_mini = c_mini.sum()
+d_mini.backward()
 
-a_torch = torch.tensor([[1, 2], [3, 4]], requires_grad=True, dtype=torch.float32)
-b_torch = torch.tensor([[5, 6], [7, 8]], requires_grad=True, dtype=torch.float32)
-y_torch = torch.tensor([[9, 2], [3, -1]], requires_grad=True, dtype=torch.float32)
-
-y_hat_torch = F_torch.linear(a_torch, b_torch)
-loss_torch = mse_loss_torch(y_hat_torch, y_torch)
-loss_torch.backward()
-
-a_mini = Tensor([[1, 2], [3, 4]])
-b_mini = Tensor([[5, 6], [7, 8]])
-y_mini = Tensor([[9, 2], [3, -1]])
-
-y_hat_mini = F_mini.linear(a_mini, b_mini)
-loss_mini = mse_loss_mini(y_hat_mini, y_mini)
-loss_mini.backward()
-
-
-print(arrays_are_close(a_torch.grad.detach().numpy(), a_mini.grad))
-print(arrays_are_close(b_torch.grad.detach().numpy(), b_mini.grad))
+gradients_are_equal(a_torch, a_mini) # compare d_d/d_a
+gradients_are_equal(b_torch, b_mini) # compare d_d/d_b
 ```
 
 --------------------------------------------------------------------------------

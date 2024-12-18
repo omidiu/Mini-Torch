@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from collections.abc import Iterator
-from typing import Tuple
+from typing import Tuple, Dict
 
 from tensor import Tensor
 
@@ -41,6 +41,17 @@ class Module:
         elif isinstance(value, Tensor):
             self._parameters[name] = value
         super().__setattr__(name, value)
+
+    def state_dict(self) -> Dict[str, Tensor]:
+        state_dict = OrderedDict()
+        for name, param in self._parameters.items():
+            if param is not None:
+                state_dict[name] = param
+        for module_name, module in self._modules.items():
+            if module is not None:
+                for name, param in module.state_dict().items():
+                    state_dict[f"{module_name}.{name}"] = param
+        return state_dict
 
     def __repr__(self) -> str:
         child_lines = []

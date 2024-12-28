@@ -45,6 +45,36 @@ def tanh(input):
     return out
 
 
+def relu(input):
+    out = Tensor(np.maximum(0, input.data), children=(input,), operator="relu")
+
+    def _backward():
+        input.grad += (np.where(out.data > 0), 1, 0) * out.grad
+
+    out._backward = _backward
+    return out
+
+
+def leaky_relu(input, alpha=0.001):
+    out = Tensor(np.maximum(alpha * input.data, input.data), children=(input,), operator="relu")
+
+    def _backward():
+        input.grad += (np.where(out.data > 0), 1, alpha) * out.grad
+
+    out._backward = _backward
+    return out
+
+
+def sigmoid(input):
+    out = Tensor(1. / (1. + np.exp(- input.data)), children=(input,), operator="leaky_relu")
+
+    def _backward():
+        input.grad += (out.data * (1. - out.data)) * out.grad
+
+    out._backward = _backward
+    return out
+
+
 def mse_loss(input, target, reduction):
     # TODO: Check Broadcasting
     squared_error = (input - target) ** 2

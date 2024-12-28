@@ -249,9 +249,9 @@ intentionally omitted as they are out of the scope of this project.
 ### Non-linear Activations
 
 - ✅ `Tanh *`: Applies the Hyperbolic Tangent (Tanh) function element-wise.
-- [ ] `ReLU *`: Applies the rectified linear unit function element-wise.
-- [ ] `LeakyReLU *`: Applies the LeakyReLU function element-wise.
-- [ ] `Sigmoid *`: Applies the Sigmoid function element-wise.
+- ✅ `ReLU *`: Applies the rectified linear unit function element-wise.
+- ✅ `LeakyReLU *`: Applies the LeakyReLU function element-wise.
+- ✅ `Sigmoid *`: Applies the Sigmoid function element-wise.
 - [ ] `Softmax *`: Applies the Softmax function to an n-dimensional input Tensor.
 - [ ] `SiLU *`: Applies the Sigmoid Linear Unit (SiLU) function, element-wise.
 

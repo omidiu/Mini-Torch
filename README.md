@@ -86,10 +86,6 @@ pip install numpy
 ### 1. Build a Simple MLP
 
 ```python
-from nn import Linear, Module, MSELoss
-from optim import Adam
-from tensor import Tensor
-import nn.functional as F
 from nn import Linear as MiniLinear, Module as MiniModule, MSELoss as MiniMSELoss
 from optim import Adam as MiniAdam
 from tensor import Tensor as MiniTensor

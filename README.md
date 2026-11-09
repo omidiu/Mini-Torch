@@ -29,28 +29,6 @@ We began with Andrej Karpathy's [micrograd](https://github.com/karpathy/microgra
 
 --------------------------------------------------------------------------------
 
-## ⭐️ Join Us on Our Journey!
-
-If MiniTorch receives **1k GitHub stars ⭐️**, we will:
-
-1. **Expand the library by adding new features**: We'll implement new `nn.Modules` and extend its functionality. Please
-   read the "Future Plans" section in this file for more information about the planned modules.
-2. **Create a YouTube playlist <img src="./statics/Youtube_logo.png" alt="YouTube Logo" width="25" />**: We will create a YouTube playlist that teaches you all the knowledge necessary to build this library. It will cover concepts such as:  
-- The required mathematics, for example, the concept of a derivative based on a matrix  
-- Advanced operations with multi-dimensional tensors  
-- Object-oriented concepts, and how PyTorch automatically identifies all the weights in your network  
-... and more.
-
-We plan to explain every single line of code written in this repository, enabling you to implement it yourself with sufficient time and patience, and gain a deeper understanding of libraries like PyTorch. Furthermore, if this library continues to develop, we will also teach all the newly added parts. For example, we will learn how the process behind the `TransformerEncoderLayer` works. (*This playlist will be presented in English or Persian.*)
-
-
-
-
-Your support will validate the value of this project and help us provide free, high-quality educational resources for
-the AI community.
-
---------------------------------------------------------------------------------
-
 ## 🚀 Quickstart
 1- clone the repository:
 
